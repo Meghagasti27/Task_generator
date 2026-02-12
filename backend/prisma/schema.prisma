@@ -1,0 +1,28 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Spec {
+  id           String   @id @default(cuid())
+  goal         String
+  users        String
+  constraints  String
+  templateType String
+  createdAt    DateTime @default(now())
+  tasks        Task[]
+}
+
+model Task {
+  id        String   @id @default(cuid())
+  title     String
+  type      String   // "story" | "engineering" | "risk"
+  order     Int
+  spec      Spec     @relation(fields: [specId], references: [id])
+  specId    String
+  createdAt DateTime @default(now())
+}

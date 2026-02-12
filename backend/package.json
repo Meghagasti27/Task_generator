@@ -1,0 +1,22 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "Megha",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "5.22.0",
+    "axios": "^1.13.5",
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "prisma": "5.22.0"
+  }
+}
