@@ -1,94 +1,149 @@
-# SpecGen
+<h1 align="center">SpecGen</h1>
 
-SpecGen is an AI-powered engineering specification generator that converts product ideas into structured user stories, engineering tasks, and risk analysis.
+<p align="center">
+  <strong>AI-Powered Engineering Specification Generator</strong><br/>
+  Transform product ideas into structured user stories, engineering tasks, and risk analysis.
+</p>
 
-## Live Demo
-Frontend: <your-frontend-url>
-Backend: <your-backend-url>
+<hr/>
 
----
+<h2>Overview</h2>
 
-## Tech Stack
+<p>
+SpecGen is a full-stack AI application that converts high-level product goals into 
+production-ready engineering specifications. The system integrates a Large Language Model 
+via Groq to generate structured development plans, which are parsed and persisted using Prisma and PostgreSQL.
+</p>
 
-Frontend:
-- React
-- Tailwind CSS
-- React Router
+<p>
+The application emphasizes clean architecture, structured prompt design, reliable parsing logic,
+and production deployment readiness.
+</p>
 
-Backend:
-- Node.js
-- Express
-- Prisma ORM
-- PostgreSQL (Render)
-- Groq SDK (LLM)
+<hr/>
 
----
+<h2>Architecture</h2>
 
-## How to Run Locally
+<ul>
+  <li><strong>Frontend:</strong> React + Vite + Tailwind CSS</li>
+  <li><strong>Backend:</strong> Node.js + Express</li>
+  <li><strong>Database:</strong> PostgreSQL (Render)</li>
+  <li><strong>ORM:</strong> Prisma</li>
+  <li><strong>LLM Provider:</strong> Groq</li>
+  <li><strong>Model Used:</strong> llama-3.1-8b-instant</li>
+</ul>
 
-### 1. Clone Repository
+<hr/>
 
-git clone <repo-url>
+<h2>Core Features</h2>
+
+<ul>
+  <li>AI-based generation of structured development plans</li>
+  <li>Strictly formatted output parsing (User Stories, Engineering Tasks, Risks)</li>
+  <li>Persistent storage of generated specifications</li>
+  <li>History view with recent spec retrieval</li>
+  <li>Detailed spec view with ordered task breakdown</li>
+  <li>Download specification as .txt</li>
+  <li>Production-ready API with status health check</li>
+</ul>
+
+<hr/>
+
+<h2>Live Deployment</h2>
+
+<ul>
+  <li><strong>Frontend:</strong> 
+    <a href="https://task-generator-five.vercel.app" target="_blank">
+      https://task-generator-five.vercel.app
+    </a>
+  </li>
+  <li><strong>Backend:</strong> 
+    <a href="https://task-generator-api.onrender.com" target="_blank">
+      https://task-generator-api.onrender.com
+    </a>
+  </li>
+  <li><strong>API Status:</strong> 
+    <a href="https://task-generator-api.onrender.com/api/status" target="_blank">
+      /api/status
+    </a>
+  </li>
+</ul>
+
+<hr/>
+
+<h2>Local Development Setup</h2>
+
+<h3>1. Clone Repository</h3>
+
+<pre>
+git clone &lt;repository-url&gt;
 cd project-folder
+</pre>
 
----
+<h3>2. Backend Configuration</h3>
 
-### 2. Backend Setup
-
+<pre>
 cd backend
 npm install
+</pre>
 
-Create .env file:
+Create a <code>.env</code> file inside the <code>backend</code> directory:
 
+<pre>
 DATABASE_URL=your_postgres_url
 GROQ_API_KEY=your_groq_key
+</pre>
 
 Run:
 
+<pre>
 npx prisma generate
 npm run dev
+</pre>
 
 Backend runs at:
-http://localhost:5000
+<pre>http://localhost:5000</pre>
 
----
+<h3>3. Frontend Configuration</h3>
 
-### 3. Frontend Setup
-
-cd frontend
+<pre>
 npm install
 npm run dev
+</pre>
 
 Frontend runs at:
-http://localhost:5173 (or your configured port)
+<pre>http://localhost:5173</pre>
 
----
+<hr/>
 
-## What Is Done
+<h2>Engineering Decisions</h2>
 
-- Spec creation and storage
-- Structured prompt engineering
-- Groq LLM integration
-- Parsing into structured sections
-- Download spec as .txt
-- History endpoint
-- Production deployment ready
-- Render PostgreSQL integration
+<ul>
+  <li>
+    <strong>Groq LLM Integration:</strong> Chosen for low latency inference and stable structured output.
+  </li>
+  <li>
+    <strong>Strict Prompt Formatting:</strong> Ensures predictable parsing and reliable section extraction.
+  </li>
+  <li>
+    <strong>Separation of Concerns:</strong> Clean division between prompt generation, parsing, persistence, and UI rendering.
+  </li>
+  <li>
+    <strong>Production Deployment:</strong> Backend and database deployed on Render; frontend deployed on Vercel.
+  </li>
+</ul>
 
----
 
-## What Is Not Done
+<h2>Project Focus</h2>
 
-- PDF export
-- Authentication system
-- Multi-user accounts
-- Advanced UI animations
-- Spec editing after creation
-- Caching layer
+<p>
+SpecGen prioritizes structured AI output, backend correctness, and deployment reliability 
+over visual complexity. The project demonstrates practical integration of a production LLM 
+into a full-stack application with persistent storage and structured parsing logic.
+</p>
 
----
+<hr/>
 
-## Deployment
-
-Backend and database deployed using Render.
-Frontend deployed separately (e.g., Vercel / Render static).
+<p align="center">
+  Built for practical AI system design and full-stack deployment demonstration.
+</p>
