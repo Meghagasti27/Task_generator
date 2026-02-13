@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../services/api";
 
 function History() {
   const [specs, setSpecs] = useState([]);
@@ -10,29 +11,12 @@ function History() {
     setLoading(true);
     setError("");
 
-    fetch("/api/specs?limit=5")
+    API.get("/specs?limit=5")
       .then((res) => {
-        if (!res.ok) {
-          return res
-            .json()
-            .then((data) => {
-              throw new Error(data?.error || `HTTP ${res.status}`);
-            })
-            .catch((parseErr) => {
-              throw new Error(`HTTP ${res.status}`);
-            });
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setSpecs(Array.isArray(data) ? data : data?.specs ?? []);
+        setSpecs(Array.isArray(res.data) ? res.data : []);
       })
       .catch((err) => {
-        const msg =
-          err?.message === "Failed to fetch" || err?.name === "TypeError"
-            ? "Backend unavailable"
-            : err?.message || "Failed to load specs";
-        setError(msg);
+        setError(err?.message || "Failed to load specs");
       })
       .finally(() => setLoading(false));
   }, []);
@@ -58,7 +42,9 @@ function History() {
                 {(s.goal || "").length > 100 ? "…" : ""}
               </p>
               <p className="text-sm text-gray-500 mt-2">
-                {s.createdAt ? new Date(s.createdAt).toLocaleDateString() : ""}
+                {s.createdAt
+                  ? new Date(s.createdAt).toLocaleDateString()
+                  : ""}
               </p>
             </Link>
           ))}
