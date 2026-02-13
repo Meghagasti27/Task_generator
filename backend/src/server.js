@@ -1,35 +1,35 @@
 require("dotenv").config();
-const express =require("express");
-const cors=require("cors");
-require("dotenv").config();
+const path = require("path");
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
-//app creation
 
 app.use(cors());
-
 app.use(express.json());
-//middleware for json parsing
 
-//health check
-app.get("/",(req,res)=>{
-    res.json({message:"Server is running"});
+app.get("/", (req, res) => {
+  res.json({ message: "Server is running" });
 });
 
-//routes
-const specsRoutes=require("./routes/specs");
-const generateRoutes=require("./routes/generate");
-const statusRoutes=require("./routes/status");
+/* Debug: ensure routes load from same directory as server.js (Windows-safe) */
+const routesDir = path.join(__dirname, "routes");
+console.log("[DEBUG] Routes directory:", routesDir);
 
+const specRouter = require(path.join(routesDir, "spec"));
+console.log("[DEBUG] spec route module loaded, type:", typeof specRouter);
 
-app.use("/api",specsRoutes);
-app.use("/api",generateRoutes);
-app.use("/api",statusRoutes);
+const statusRouter = require(path.join(routesDir, "status"));
+console.log("[DEBUG] status route module loaded");
 
-const PORT = 5000;
+app.use("/api", specRouter);
+app.use("/api", statusRouter);
+console.log("[DEBUG] Mounted /api -> spec and /api -> status");
 
-app.listen(PORT,()=>{
-    console.log(`Server running on port ${PORT}`);
-    console.log(`http://localhost:${PORT}`);
+const PORT = process.env.PORT || 5000;
 
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`http://localhost:${PORT}`);
+  console.log("[DEBUG] GET http://localhost:" + PORT + "/api/specs available");
 });
