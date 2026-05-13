@@ -1,17 +1,4 @@
-// import axios from "axios";
 
-// export async function generateWithLLM(prompt) {
-//   const response = await axios.post(
-//     "http://localhost:11434/api/generate",
-//     {
-//       model: "llama3",
-//       prompt: prompt,
-//       stream: false,
-//     }
-//   );
-
-//   return response.data.response;
-// }
 const axios = require("axios");
 const Groq = require("groq-sdk");
 

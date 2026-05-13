@@ -28,8 +28,23 @@ console.log("[DEBUG] Mounted /api -> spec and /api -> status");
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-  console.log(`http://localhost:${PORT}`);
-  console.log("[DEBUG] GET http://localhost:" + PORT + "/api/specs available");
-});
+
+const { connectWithRetry } = require("./lib/prisma");
+
+async function startServer() {
+  try {
+    await connectWithRetry();
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+      console.log(`http://localhost:${PORT}`);
+      console.log("[DEBUG] GET http://localhost:" + PORT + "/api/specs available");
+    });
+
+  } catch (err) {
+    console.error("Failed to start server due to DB issues");
+    process.exit(1);
+  }
+}
+
+startServer();

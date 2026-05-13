@@ -26,3 +26,13 @@ model Task {
   specId    String
   createdAt DateTime @default(now())
 }
+model Progress {
+  id        String   @id @default(cuid())
+  specId    String
+  taskId    String
+  completed Boolean  @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@unique([specId, taskId])
+}

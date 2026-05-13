@@ -3,17 +3,47 @@ import Home from "./pages/Home";
 import CreateSpec from "./pages/CreateSpec";
 import SpecDetail from "./pages/SpecDetail";
 import History from "./pages/History";
-import Status from "./pages/Status";
+
 
 function App() {
   return (
     <BrowserRouter>
-      <nav className="bg-white border-b border-gray-200">
-        <div className="max-w-3xl mx-auto px-6 py-3 flex gap-6">
-          <Link to="/" className="text-gray-700 hover:text-black">Home</Link>
-          <Link to="/create" className="text-gray-700 hover:text-black">Create</Link>
-          <Link to="/history" className="text-gray-700 hover:text-black">History</Link>
-          <Link to="/status" className="text-gray-700 hover:text-black">Status</Link>
+      <nav className="relative z-10 w-full border-b border-[#e7e3d9]/80 backdrop-blur-sm">
+        <div className="max-w-6xl mx-auto px-8 py-5 flex items-center justify-between">
+
+          {/* Left Brand */}
+          <div
+            className="text-[12px] tracking-[0.35em] text-[#1f1f1e] font-bold"
+            style={{ fontFamily: "'Courier New', monospace" }}
+          >
+            SpecGen
+          </div>
+
+          {/* Right Links */}
+          <div className="flex items-center gap-10 text-[12px] tracking-[0.18em] uppercase text-[#5f5f5a]">
+
+            <Link
+              to="/"
+              className="hover:text-black transition-colors duration-300"
+            >
+              Home
+            </Link>
+
+            <Link
+              to="/create"
+              className="hover:text-black transition-colors duration-300"
+            >
+              Create
+            </Link>
+
+            <Link
+              to="/history"
+              className="hover:text-black transition-colors duration-300"
+            >
+              History
+            </Link>
+
+          </div>
         </div>
       </nav>
       <Routes>
@@ -21,7 +51,7 @@ function App() {
         <Route path="/create" element={<CreateSpec />} />
         <Route path="/spec/:id" element={<SpecDetail />} />
         <Route path="/history" element={<History />} />
-        <Route path="/status" element={<Status />} />
+
       </Routes>
     </BrowserRouter>
   );

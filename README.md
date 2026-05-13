@@ -1,8 +1,8 @@
 <h1 align="center">SpecGen</h1>
 
 <p align="center">
-  <strong>AI-Powered Engineering Specification Generator</strong><br/>
-  Transform product ideas into structured user stories, engineering tasks, and risk analysis.
+  <strong>AI-Powered Weekly Roadmap & Execution Planner</strong><br/>
+  Transform product ideas into structured weekly execution plans with interactive progress tracking.
 </p>
 
 <hr/>
@@ -10,14 +10,14 @@
 <h2>Overview</h2>
 
 <p>
-SpecGen is a full-stack AI application that converts high-level product goals into 
-production-ready engineering specifications. The system integrates a Large Language Model 
-via Groq to generate structured development plans, which are parsed and persisted using Prisma and PostgreSQL.
+SpecGen is a full-stack AI-powered planning application that converts high-level product ideas into
+structured weekly execution roadmaps. The system integrates a Large Language Model via Groq
+to generate actionable development plans, which are parsed, stored, and tracked using Prisma and PostgreSQL.
 </p>
 
 <p>
-The application emphasizes clean architecture, structured prompt design, reliable parsing logic,
-and production deployment readiness.
+The application focuses on practical AI integration, structured prompt engineering,
+backend reliability, and execution tracking through an interactive roadmap interface.
 </p>
 
 <hr/>
@@ -38,14 +38,30 @@ and production deployment readiness.
 <h2>Core Features</h2>
 
 <ul>
-  <li>AI-based generation of structured development plans</li>
-  <li>Strictly formatted output parsing (User Stories, Engineering Tasks, Risks)</li>
-  <li>Persistent storage of generated specifications</li>
-  <li>History view with recent spec retrieval</li>
-  <li>Detailed spec view with ordered task breakdown</li>
-  <li>Download specification as .txt</li>
-  <li>Production-ready API with status health check</li>
+  <li>AI-generated weekly execution roadmaps</li>
+  <li>Structured roadmap parsing and task extraction</li>
+  <li>Interactive task progress tracking</li>
+  <li>Persistent storage using PostgreSQL</li>
+  <li>History view with roadmap retrieval</li>
+  <li>Delete roadmap functionality</li>
+  <li>Download roadmap as .txt file</li>
+  <li>Auto-expanding input fields for improved UX</li>
+  <li>Production-ready backend API architecture</li>
 </ul>
+
+<hr/>
+
+<h2>How It Works</h2>
+
+<ol>
+  <li>User enters project details and requirements</li>
+  <li>Frontend sends request to backend API</li>
+  <li>Backend generates a structured AI prompt</li>
+  <li>Groq LLM creates a weekly execution roadmap</li>
+  <li>Backend parses the response into structured tasks</li>
+  <li>Roadmap is stored in PostgreSQL database</li>
+  <li>Frontend displays roadmap timeline with progress tracking</li>
+</ol>
 
 <hr/>
 
@@ -57,14 +73,10 @@ and production deployment readiness.
       https://task-generator-five.vercel.app
     </a>
   </li>
+
   <li><strong>Backend:</strong> 
     <a href="https://task-generator-api.onrender.com" target="_blank">
       https://task-generator-api.onrender.com
-    </a>
-  </li>
-  <li><strong>API Status:</strong> 
-    <a href="https://task-generator-api.onrender.com/api/status" target="_blank">
-      /api/status
     </a>
   </li>
 </ul>
@@ -80,39 +92,84 @@ git clone &lt;repository-url&gt;
 cd project-folder
 </pre>
 
-<h3>2. Backend Configuration</h3>
+<h3>2. Frontend Setup</h3>
+
+<pre>
+npm install
+</pre>
+
+Create a root <code>.env</code> file:
+
+<pre>
+VITE_API_URL=http://localhost:5001/api
+</pre>
+
+Run frontend:
+
+<pre>
+npm run dev
+</pre>
+
+Frontend runs at:
+
+<pre>
+http://localhost:5173
+</pre>
+
+<h3>3. Backend Setup</h3>
 
 <pre>
 cd backend
 npm install
 </pre>
 
-Create a <code>.env</code> file inside the <code>backend</code> directory:
+Create a <code>.env</code> file inside backend directory:
 
 <pre>
-DATABASE_URL=your_postgres_url
-GROQ_API_KEY=your_groq_key
+DATABASE_URL=your_postgresql_url
+GROQ_API_KEY=your_groq_api_key
+PORT=5001
 </pre>
 
-Run:
+Install Prisma dependencies:
+
+<pre>
+npm install prisma@5.22.0 @prisma/client@5.22.0
+</pre>
+
+Generate Prisma client:
 
 <pre>
 npx prisma generate
+</pre>
+
+Push schema to database:
+
+<pre>
+npx prisma db push
+</pre>
+
+Run backend:
+
+<pre>
 npm run dev
 </pre>
 
 Backend runs at:
-<pre>http://localhost:5000</pre>
-
-<h3>3. Frontend Configuration</h3>
 
 <pre>
-npm install
-npm run dev
+http://localhost:5001
 </pre>
 
-Frontend runs at:
-<pre>http://localhost:5173</pre>
+<hr/>
+
+<h2>Database Models</h2>
+
+<ul>
+  <li><strong>Spec:</strong> Stores roadmap details and project information</li>
+  <li><strong>Task:</strong> Stores parsed weekly tasks and risks</li>
+  <li><strong>Progress:</strong> Stores interactive task completion tracking</li>
+</ul>
 
 <hr/>
 
@@ -120,30 +177,49 @@ Frontend runs at:
 
 <ul>
   <li>
-    <strong>Groq LLM Integration:</strong> Chosen for low latency inference and stable structured output.
+    <strong>Structured Prompt Engineering:</strong> Used to generate predictable weekly roadmap output.
   </li>
+
   <li>
-    <strong>Strict Prompt Formatting:</strong> Ensures predictable parsing and reliable section extraction.
+    <strong>Response Parsing Logic:</strong> Custom parser extracts weekly tasks into structured database records.
   </li>
+
   <li>
-    <strong>Separation of Concerns:</strong> Clean division between prompt generation, parsing, persistence, and UI rendering.
+    <strong>Retry-Based Database Handling:</strong> Added retry mechanism for improved reliability with Render PostgreSQL.
   </li>
+
   <li>
-    <strong>Production Deployment:</strong> Backend and database deployed on Render; frontend deployed on Vercel.
+    <strong>Progress Tracking System:</strong> Allows persistent roadmap execution tracking across sessions.
+  </li>
+
+  <li>
+    <strong>Separation of Concerns:</strong> Clean architecture separating AI generation, parsing, persistence, and UI rendering.
   </li>
 </ul>
 
+<hr/>
+
+<h2>Challenges Faced</h2>
+
+<ul>
+  <li>Prisma version compatibility issues</li>
+  <li>Database connection failures and retry handling</li>
+  <li>Ensuring consistent AI-generated structure</li>
+  <li>Reliable parsing of dynamic LLM responses</li>
+</ul>
+
+<hr/>
 
 <h2>Project Focus</h2>
 
 <p>
-SpecGen prioritizes structured AI output, backend correctness, and deployment reliability 
-over visual complexity. The project demonstrates practical integration of a production LLM 
-into a full-stack application with persistent storage and structured parsing logic.
+SpecGen focuses on practical AI system design, execution planning,
+backend reliability, and structured roadmap generation rather than visual complexity.
+The project demonstrates real-world integration of AI into a deployable full-stack application.
 </p>
 
 <hr/>
 
 <p align="center">
-  Built for practical AI system design and full-stack deployment demonstration.
+  Built for practical AI system design and full-stack execution planning.
 </p>

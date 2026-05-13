@@ -1,5 +1,3 @@
-// Example fetch calls (relative /api - proxied by Vite in dev)
-
 // Status
 const status = await fetch("/api/status").then((r) => {
   if (!r.ok) throw new Error("Status failed");
